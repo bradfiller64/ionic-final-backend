@@ -20,7 +20,7 @@ export function TaskFactory(sequelize: Sequelize) {
         },
         completed: {
             type: DataTypes.BOOLEAN,
-            allowNull: false,
+            defaultValue: false,
         }
     }, {
         freezeTableName: true,
