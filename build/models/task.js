@@ -19,7 +19,7 @@ function TaskFactory(sequelize) {
         },
         completed: {
             type: sequelize_1.DataTypes.BOOLEAN,
-            allowNull: false,
+            defaultValue: false,
         }
     }, {
         freezeTableName: true,
