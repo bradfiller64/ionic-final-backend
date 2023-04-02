@@ -7,8 +7,15 @@ export const getTasks: RequestHandler = async (req, res) => {
 }
 
 export const createTask: RequestHandler = async (req, res) => {
-    const task = await Task.create(req.body);
-    res.json(task);
+    let newTask: Task = req.body;
+
+    if (newTask.title) {
+        let created = await Task.create(newTask);
+        res.status(201).json(created);
+    }
+    else {
+        res.status(404).json({ error: 'No task to add' });
+    }
 };
 
 export const editTask: RequestHandler = async (req, res) => {

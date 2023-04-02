@@ -8,8 +8,14 @@ const getTasks = async (req, res) => {
 };
 exports.getTasks = getTasks;
 const createTask = async (req, res) => {
-    const task = await task_1.Task.create(req.body);
-    res.json(task);
+    let newTask = req.body;
+    if (newTask.title) {
+        let created = await task_1.Task.create(newTask);
+        res.status(201).json(created);
+    }
+    else {
+        res.status(404).json({ error: 'No task to add' });
+    }
 };
 exports.createTask = createTask;
 const editTask = async (req, res) => {
