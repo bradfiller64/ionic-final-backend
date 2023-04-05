@@ -1,9 +1,20 @@
 import { RequestHandler } from "express";
 import { Task } from "../models/task";
 
-export const getTasks: RequestHandler = async (req, res) => {
+export const getAllTasks: RequestHandler = async (req, res) => {
     let tasks = await Task.findAll();
     res.status(200).json(tasks);
+}
+
+export const getTask: RequestHandler = async (req, res, next) => {
+    let taskId = req.params.id;
+    let task = await Task.findByPk(taskId);
+    if (task) {
+        res.status(200).json(task);
+    }
+    else {
+        res.status(404).json({});
+    }
 }
 
 export const createTask: RequestHandler = async (req, res) => {

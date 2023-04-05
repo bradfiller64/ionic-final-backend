@@ -1,12 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteTask = exports.editTask = exports.createTask = exports.getTasks = void 0;
+exports.deleteTask = exports.editTask = exports.createTask = exports.getTask = exports.getAllTasks = void 0;
 const task_1 = require("../models/task");
-const getTasks = async (req, res) => {
+const getAllTasks = async (req, res) => {
     let tasks = await task_1.Task.findAll();
     res.status(200).json(tasks);
 };
-exports.getTasks = getTasks;
+exports.getAllTasks = getAllTasks;
+const getTask = async (req, res, next) => {
+    let taskId = req.params.id;
+    let task = await task_1.Task.findByPk(taskId);
+    if (task) {
+        res.status(200).json(task);
+    }
+    else {
+        res.status(404).json({});
+    }
+};
+exports.getTask = getTask;
 const createTask = async (req, res) => {
     let newTask = req.body;
     if (newTask.title) {
