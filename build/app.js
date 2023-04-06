@@ -14,7 +14,7 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 const cors = require('cors');
 const corsOptions = {
-    origin: ['http://localhost:4200', 'http://localhost:3001']
+    origin: ['http://localhost:8100', 'http://localhost:3001']
 };
 app.use(cors(corsOptions));
 // routes
